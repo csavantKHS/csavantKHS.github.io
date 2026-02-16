@@ -81,9 +81,9 @@ $(function () {
     createCannon('top',800,1500);
     createCannon('top',1000,1500);
     createCannon('top',1200,1500);
-    createCannon('right',415,8000);
-
+    //createCannon('right',415,8000);
     createCannon('right', 750, 400);
+    createCannon('left',0,2500,20,10,);
 
 
     
