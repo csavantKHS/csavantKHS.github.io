@@ -78,9 +78,9 @@
         // Count Misses Function
         function youSuck() {
           misses ++;
-          if (misses === 10) {
+          if (misses === chances) {
             clearInterval(interval);
-            alert("Just get good");
+            alert("get good");
             location.reload();
           }
         }
@@ -98,6 +98,7 @@
         var defaultEquation;
         var bossEquation;
         var misses = 0;
+        var chances = 0;
         
         var difficultyLevel = prompt("Easy, Normal, or Hard (all lowercase)?");
 
@@ -106,18 +107,21 @@
           speedY = 1;
           defaultEquation = points + 1;
           bossEquation = points + 5;
+          chances = 30;
         }
         if (difficultyLevel === "normal") {
           speed = 5;
           speedY = 5;
           defaultEquation = points + 10;
           bossEquation = (points + 5) * 1.5;
+          chances = 20;
         }
         if (difficultyLevel === "hard") {
           speed = 10;
           speedY = 10;
           defaultEquation = points * 1.5;
           bossEquation = points * 3 + 10;
+          chances = 10;
         }
 
 
