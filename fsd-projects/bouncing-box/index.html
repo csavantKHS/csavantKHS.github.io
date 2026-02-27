@@ -34,7 +34,6 @@
   <body class="board">
     <!-- HTML for the box -->
     <div class="box">?</div>
-
     <script>
       (function () {
         "use strict";
@@ -61,9 +60,9 @@
         board.on("click", youSuck);
 
         // moves the Box to a new position on the screen along the X-Axis
-       function moveBoxTo(newPositionX, newPositionY) {
-         box.css("left", newPositionX);
-         box.css("top", newPositionY);
+        function moveBoxTo(newPositionX, newPositionY) {
+          box.css("left", newPositionX);
+          box.css("top", newPositionY);
         }
 
         // changes the text displayed on the Box
@@ -87,19 +86,37 @@
 
         
         // TODO 2 - Variable declarations
-        var positionX = 0;
+        var positionX = Math.random() * boardWidth;
+        var boardHeight = jQuery(window).height();
         var points = 1;
         var speed;
-        var positionY = 0;
+        var positionY = Math.random() * boardHeight; 
         var speedY;
-        var boardHeight = jQuery(window).height();
         var xStart;
         var yStart;
         var defaultEquation;
         var bossEquation;
         var misses = 0;
         var chances = 0;
+        var directionX = Math.random();
+        var directionY = Math.random();
+        var bossBox = "rgb(255, 0, 0)";
+        var deafultBox = "rgb(97, 239, 111)";
+
+        if (directionX >= 0.5) {
+          directionX = -1;
+        }
+        else {
+          directionX = 1;
+        }
+        if (directionY >= 0.5) {
+          directionY = -1;
+        }
+        else {
+          directionY = 1;
+        }
         
+        // Set difficulty
         var difficultyLevel = prompt("Easy, Normal, or Hard (all lowercase)?");
 
         if (difficultyLevel === "easy") {
@@ -112,7 +129,7 @@
         if (difficultyLevel === "normal") {
           speed = 5;
           speedY = 5;
-          defaultEquation = points + 10;
+          defaultEquation = points + 5;
           bossEquation = (points + 5) * 1.5;
           chances = 20;
         }
@@ -134,22 +151,22 @@
          */
         function update() {
           moveBoxTo(positionX, positionY);
-				  positionX = positionX + speed;
+				  positionX += speed;
 				  if (positionX > boardWidth) {
-					  speed = speed * -1
+					  speed = speed * -1;
 				  }
 				  if (positionX < 0) {
-					  speed = speed * -1
+					  speed = speed * -1;
 				  }
-				  positionY = positionY + speedY;
+				  positionY += speedY;
 				  if (positionY > boardHeight){
-					  speedY = speedY * -1
+					  speedY = speedY * -1;
 				  }
 				  if (positionY < 0){
-					speedY = speedY * -1
-				}
-
-        }
+					speedY = speedY * -1;
+				  }
+          }
+          
 
         /**
          * This Function will be called each time the box is clicked.
@@ -161,20 +178,25 @@
         function handleBoxClick() {
           xStart = Math.random() * boardWidth;
           yStart = Math.random() * boardHeight;
+          speed *= directionX;
+          speedY *= directionY;
           positionX = xStart;
           positionY = yStart;
           changeBoxText(points);
           points ++;
-          if (points % 6 === 0) {
+          if (points % 5 === 1) {
             speed =  bossEquation;
             speedY = bossEquation;
+            alert("Boss Round!");
+            box.css("background-color", bossBox);
           }
-          if (points % 3 !== 0) {
+          if (points % 5 !== 1) {
             speed = deafaultEquation;
             speedY = deafaultEquation;
-          }
+            box.css("background-color", deafultBox); // Not changing the color back to this after being boss round
+          }       
         }        
-      })();
+      })()
     </script>
   </body>
 </html>
