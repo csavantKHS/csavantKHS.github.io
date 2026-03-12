@@ -88,7 +88,7 @@
         // TODO 2 - Variable declarations
         var positionX = Math.random() * boardWidth;
         var boardHeight = jQuery(window).height();
-        var points = 1;
+        var points = 0;
         var speed;
         var positionY = Math.random() * boardHeight; 
         var speedY;
@@ -98,11 +98,12 @@
         var bossEquation;
         var misses = 0;
         var chances = 0;
+        var bossBox = "rgb(255, 0, 0)";
+        var defaultBox = "rgb(97, 239, 111)";
+        
         var directionX = Math.random();
         var directionY = Math.random();
-        var bossBox = "rgb(255, 0, 0)";
-        var deafultBox = "rgb(97, 239, 111)";
-
+        
         if (directionX >= 0.5) {
           directionX = -1;
         }
@@ -115,9 +116,9 @@
         else {
           directionY = 1;
         }
-        
+
         // Set difficulty
-        var difficultyLevel = prompt("Easy, Normal, or Hard (all lowercase)?");
+        var difficultyLevel = prompt("easy, normal, or hard?");
 
         if (difficultyLevel === "easy") {
           speed = 1;
@@ -136,7 +137,7 @@
         if (difficultyLevel === "hard") {
           speed = 10;
           speedY = 10;
-          defaultEquation = points * 1.5;
+          defaultEquation = (points + 2) * 2.5;
           bossEquation = points * 3 + 10;
           chances = 10;
         }
@@ -152,7 +153,7 @@
         function update() {
           moveBoxTo(positionX, positionY);
 				  positionX += speed;
-				  if (positionX > boardWidth) {
+			    if (positionX > boardWidth) {
 					  speed = speed * -1;
 				  }
 				  if (positionX < 0) {
@@ -165,7 +166,7 @@
 				  if (positionY < 0){
 					speedY = speedY * -1;
 				  }
-          }
+        }
           
 
         /**
@@ -182,18 +183,17 @@
           speedY *= directionY;
           positionX = xStart;
           positionY = yStart;
-          changeBoxText(points);
           points ++;
-          if (points % 5 === 1) {
+          changeBoxText(points);
+          if (points % 5 === 0) {
             speed =  bossEquation;
             speedY = bossEquation;
             alert("Boss Round!");
             box.css("background-color", bossBox);
-          }
-          if (points % 5 !== 1) {
-            speed = deafaultEquation;
-            speedY = deafaultEquation;
-            box.css("background-color", deafultBox); // Not changing the color back to this after being boss round
+          } else {
+            speed = defaultEquation;
+            speedY = defaultEquation;
+            box.css("background-color", defaultBox);
           }       
         }        
       })()
