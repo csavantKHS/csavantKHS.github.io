@@ -31,6 +31,14 @@ var init = function (window) {
             view.addChild(circle);
             circles.push(circle);
         }
+        Gamification.init({
+            canvas: canvas,
+            view: view,
+            draw: draw,
+            physikz: physikz,
+            circles: circles,
+            game: game
+        });
 
 
         // TODO 3 : Call the drawCircle() function
@@ -53,11 +61,9 @@ var init = function (window) {
             // TODO 8 / TODO 9 : Iterate over the array
             for (var i = 0; i < circles.length; i++) {
                 physikz.updatePosition(circles[i]);
-            }
-
-            for (var i = 0; i < circles.length; i++) {
                 game.checkCirclePosition(circles[i]);
             }
+            Gamification.update();
         }
     
         /* 
