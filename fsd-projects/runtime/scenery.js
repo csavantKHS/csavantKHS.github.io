@@ -14,11 +14,11 @@ const scenery = {
   building: {
     imageUrl: "images/backgrounds/building.png",
     loopWidth: 1400,
-    instances: [{ x: 400, width: 100, height: 300, speedX: -2 }],
+    instances: [{ x: 1000, width: 150, height: 200, speedX: -2 }, {x: 540, width: 300, height: 200, speedX: -2}, {x: 100, width: 50, height: 150, speedX: -2}, { x: 50, width: 100, height: 200, speedX: -2}],
   },
-  lamp: {
+    lamp: {
     imageUrl: "images/backgrounds/lamp.png",
     loopWidth: 1400,
-    instances: [{ x: 700, width: 50, height: 150, speedX: 0 }],
+    instances: [{ x: 1000, width: 50, height: 150, speedX: -2 }, { x: 500, width: 50, height: 150, speedX: -2}, { x: 1300, width: 50, height: 150, speedX: -2}, { x: 200, width: 50, height: 150, speedX: -2}],
   },
 };
